@@ -18,13 +18,36 @@
             android:inputType="none"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/server_addr"
+            android:text="https://"
+            android:textSize="24sp"
+            android:textColorHint="@android:color/darker_gray"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textSize="14sp"
+            android:text="@string/check_login"
+            android:background="@drawable/login_btn"
+            />
+
+        <View
+            style="@style/LineLogin"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            />
+        <EditText
+            android:inputType="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="24sp"
             android:hint="@string/username"
             android:textColorHint="@android:color/darker_gray"
             />
 
         <EditText
-            android:inputType="none"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -32,19 +55,10 @@
             android:textColorHint="@android:color/darker_gray"
             />
 
-        <EditText
-            android:inputType="none"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/server_addr"
-            android:textSize="24sp"
-            android:textColorHint="@android:color/darker_gray"
-            />
-        
         <Button
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="24sp"
+            android:layout_height="30dp"
+            android:textSize="14sp"
             android:text="@string/btn_login"
             android:background="@drawable/login_btn"
             />
