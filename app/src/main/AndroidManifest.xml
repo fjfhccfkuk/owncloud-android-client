@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:launchMode="singleInstance"
-            android:name="com.example.hsx.ui.LoginActivity"
+            android:name="com.example.hsx.ui.Splash"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.example.hsx.ui.LoginActivity" />
+        <activity android:name="com.example.hsx.ui.MainActivity" />
     </application>
 
 </manifest>
