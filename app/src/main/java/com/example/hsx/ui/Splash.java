@@ -1,14 +1,18 @@
 package com.example.hsx.ui;
 
+import android.Manifest;
 import android.accounts.Account;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 
@@ -25,6 +29,7 @@ import com.owncloud.android.lib.resources.files.ReadRemoteFileOperation;
 import com.owncloud.android.lib.resources.files.ReadRemoteFolderOperation;
 import com.owncloud.android.lib.resources.files.RemoteFile;
 
+import java.security.Permissions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +48,11 @@ public class Splash extends BaseActivity implements Jump{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.splash_layout);
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
 
         Uri ser = Uri.parse("https://demo.owncloud.org");
         OwnCloudClient client = OwnCloudClientFactory.createOwnCloudClient(ser, this, true);
