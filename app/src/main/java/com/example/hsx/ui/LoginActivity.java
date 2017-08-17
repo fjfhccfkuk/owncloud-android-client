@@ -23,6 +23,8 @@ public class LoginActivity extends Activity {
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN);
 
+
+
     }
 
     @Override
