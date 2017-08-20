@@ -32,4 +32,12 @@
         <item name="android:layout_height"> 4dp </item>
     </style>
 
+    <style name="SplishTheme" parent="Base.Theme.AppCompat">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:activityOpenEnterAnimation">@android:anim/fade_in</item>
+
+    </style>
 </resources>

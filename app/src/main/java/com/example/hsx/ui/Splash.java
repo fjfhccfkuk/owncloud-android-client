@@ -1,55 +1,45 @@
 package com.example.hsx.ui;
 
-import android.Manifest;
-import android.accounts.Account;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.View;
 
-import com.example.hsx.myapplication.R;
-import com.owncloud.android.lib.common.OwnCloudClient;
-import com.owncloud.android.lib.common.OwnCloudClientFactory;
-import com.owncloud.android.lib.common.OwnCloudCredentials;
-import com.owncloud.android.lib.common.OwnCloudCredentialsFactory;
-import com.owncloud.android.lib.common.operations.OnRemoteOperationListener;
-import com.owncloud.android.lib.common.operations.RemoteOperation;
-import com.owncloud.android.lib.common.operations.RemoteOperationResult;
-import com.owncloud.android.lib.resources.files.FileUtils;
-import com.owncloud.android.lib.resources.files.ReadRemoteFileOperation;
-import com.owncloud.android.lib.resources.files.ReadRemoteFolderOperation;
-import com.owncloud.android.lib.resources.files.RemoteFile;
+import com.busap.utils.BusLog;
+import com.example.hsx.data.models.PrivCloudAccount;
 
-import java.security.Permissions;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by hsx on 17-8-14.
  */
 
-public class Splash extends BaseActivity implements Jump{
+public class Splash extends BaseActivity {
 
     private Handler ownHandler = null;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.splash_layout);
 
+        List<PrivCloudAccount> accounts = getAccounts(this);
+        if (accounts == null || accounts.size() <= 0) {
+            BusLog.write("OWNCLOUD", " accounts:" + accounts.toString());
+            //跳转登录界面
 
+            Intent i = new Intent();
+            i.setClass(this, LoginActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
+            Jump2NextActivity(pi, 3);
+        }
+
+        /**
+         * 自动登录到服务器,跳转到展示页面
+         */
+/*
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
@@ -82,7 +72,7 @@ public class Splash extends BaseActivity implements Jump{
                     Log.i("OWNCLOUD", " Failed to get remote files err:" + result.getException() + " " + result.getAuthenticateHeader() + " " + result.getHttpCode());
                 }
             }
-        }, ownHandler);
+        }, ownHandler);*/
     }
 
     @Override
@@ -92,48 +82,22 @@ public class Splash extends BaseActivity implements Jump{
         Intent i = new Intent();
         i.setClass(this, LoginActivity.class);
 
-        PendingIntent pi = PendingIntent.getActivities(this, 990, new Intent[]{i}, PendingIntent.FLAG_CANCEL_CURRENT);
+        Log.i("OWNCLOUD", "onResume");
+//        PendingIntent pi = PendingIntent.getActivities(this, 990, new Intent[]{i}, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        new Thread(new JumpRunnable(pi)).start();
+//        new Thread(new JumpRunnable(pi)).start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        Log.i("OWNCLOUD", "onPause");
+        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public void Jump2NextActivity() {
-        Intent i = new Intent();
-        i.setClass(this, LoginActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    private class JumpRunnable implements Runnable {
-        private Jump mJ = null;
-        private PendingIntent mPi = null;
-
-        public JumpRunnable(PendingIntent pi) {
-            this.mJ = null;
-            this.mPi = pi;
-        }
-
-        @Override
-        public void run() {
-            try {
-                Thread.sleep(3000);
-//                this.mJ.Jump2NextActivity();
-
-                try {
-                    this.mPi.send();
-                } catch (Exception e){}
-            } catch (Exception e){}
-        }
+        Log.i("OWNCLOUD", "onDestroy");
     }
 }
