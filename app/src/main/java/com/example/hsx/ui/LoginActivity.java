@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.busap.utils.BusLog;
 import com.example.hsx.myapplication.R;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Created by hsx on 17-8-14.
  */
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,11 +23,7 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.login_layout);
 
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN);
-
-
+        new Thread(new sslRunnable()).start();
 
     }
 
@@ -40,5 +40,28 @@ public class LoginActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    //test
+    private class sslRunnable implements  Runnable {
+        @Override
+        public void run() {
+            try {
+
+                URL url = new URL("https://demo.owncloud.org");
+                
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                int resCode = con.getResponseCode();
+
+            //    switch (resCode)
+                {
+                    BusLog.write("OWNCLOUD", " response Code:" + resCode);
+                }
+
+            } catch (Exception e){
+                BusLog.write("OWNCLOUD", " response Excp:" + e.toString());
+            }
+        }
     }
 }
