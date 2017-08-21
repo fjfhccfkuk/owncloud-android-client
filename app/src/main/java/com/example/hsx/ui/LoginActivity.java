@@ -2,34 +2,46 @@ package com.example.hsx.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.busap.utils.BusLog;
 import com.example.hsx.myapplication.R;
+import com.example.hsx.presenter.LoginPresenter;
+import com.example.hsx.presenter.Presenter;
+import com.example.hsx.ui.Dialog.LoginProcessDialog;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 /**
  * Created by hsx on 17-8-14.
  */
 
 public class LoginActivity extends BaseActivity {
+
+    private Presenter.Login loginPresenter = null;
+    private LoginProcessDialog loginDialog = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.login_layout);
 
-        new Thread(new sslRunnable()).start();
-
+        loginDialog = LoginProcessDialog.getInstance(this);
+        loginPresenter = LoginPresenter.getInstance(this, loginDialog);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        loginPresenter.login();
     }
 
     @Override
@@ -49,8 +61,14 @@ public class LoginActivity extends BaseActivity {
             try {
 
                 URL url = new URL("https://demo.owncloud.org");
-                
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                SSLContext sslCtx = SSLContext.getInstance("TLS");
+
+                HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+                con.setConnectTimeout(3000);
+                con.setRequestMethod("GET");
+                con.setSSLSocketFactory(null);
+                con.setSSLSocketFactory(sslCtx.getSocketFactory());
 
                 int resCode = con.getResponseCode();
 
