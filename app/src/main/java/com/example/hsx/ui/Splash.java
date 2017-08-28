@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Process;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -33,8 +35,15 @@ public class Splash extends BaseActivity {
             Intent i = new Intent();
             i.setClass(this, LoginActivity.class);
             PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
-            Jump2NextActivity(pi, 3);
+//            Jump2NextActivity(pi, 3);
+//            return;
         }
+
+        //jump to file display activity
+        Intent i = new Intent();
+        i.setClass(this, MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, i, 0);
+        Jump2NextActivity(pi, 3);
 
         /**
          * 自动登录到服务器,跳转到展示页面
