@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pointBtn="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    >
+
+    <com.example.hsx.ui.Widgets.PointBtn
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        pointBtn:pad_bottom="10dp"
+        pointBtn:pad_left="0dp"
+        pointBtn:pad_right="0dp"
+        pointBtn:pad_top="10dp"
+        pointBtn:forcusOffDraw="@drawable/moon"
+        pointBtn:forcusOnDraw="@drawable/moon1"
+        />
+
+    <com.example.hsx.ui.Widgets.PointBtn
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        pointBtn:pad_bottom="0dp"
+        pointBtn:pad_left="0dp"
+        pointBtn:pad_right="0dp"
+        pointBtn:pad_top="0dp"
+        pointBtn:forcusOffDraw="@drawable/moon"
+        pointBtn:forcusOnDraw="@drawable/moon1"
+        />
+
+    <com.example.hsx.ui.Widgets.PointBtn
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        pointBtn:pad_bottom="0dp"
+        pointBtn:pad_left="0dp"
+        pointBtn:pad_right="0dp"
+        pointBtn:pad_top="0dp"
+        pointBtn:forcusOffDraw="@drawable/moon"
+        pointBtn:forcusOnDraw="@drawable/moon1"
+        />
+
+    <com.example.hsx.ui.Widgets.PointBtn
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        pointBtn:pad_bottom="0dp"
+        pointBtn:pad_left="0dp"
+        pointBtn:pad_right="0dp"
+        pointBtn:pad_top="0dp"
+        pointBtn:forcusOffDraw="@drawable/moon"
+        pointBtn:forcusOnDraw="@drawable/moon1"
+        />
+
+    <com.example.hsx.ui.Widgets.PointBtn
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        pointBtn:pad_bottom="0dp"
+        pointBtn:pad_left="0dp"
+        pointBtn:pad_right="0dp"
+        pointBtn:pad_top="0dp"
+        pointBtn:forcusOffDraw="@drawable/moon"
+        pointBtn:forcusOnDraw="@drawable/moon1"
+        />
+</LinearLayout>
