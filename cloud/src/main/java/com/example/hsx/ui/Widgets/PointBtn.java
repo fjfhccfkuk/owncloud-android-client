@@ -169,12 +169,22 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
     @Override
     public void forcusOn() {
         this.mDrawableCur = this.mDrawableForcusOn;
+
+        if (mCallbackListener != null) {
+            mCallbackListener.onShow(this);
+        }
+
         postInvalidate();
     }
 
     @Override
     public void forcusOff() {
         this.mDrawableCur = this.mDrawableForcusOff;
+
+        if (mCallbackListener != null) {
+            mCallbackListener.onDismiss(this);
+        }
+
         postInvalidate();
     }
 

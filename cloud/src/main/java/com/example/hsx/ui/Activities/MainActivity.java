@@ -8,9 +8,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.busap.utils.BusLog;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.ui.AdapterListview;
 import com.example.hsx.ui.IPictureView;
+import com.example.hsx.ui.Widgets.IPointBtn;
 import com.example.hsx.ui.Widgets.PointBtn;
 
 public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
@@ -50,6 +52,47 @@ public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
             }
         });
 */
+
+        BtnListner listener = new BtnListner();
+
+        mBtnCloud = (PointBtn) findViewById(R.id.btnCloud);
+        mBtnCloud.setCallbackListener(listener);
+        mBtnLocal = (PointBtn) findViewById(R.id.btnLocal);
+        mBtnLocal.setCallbackListener(listener);
+        mBtnMine = (PointBtn) findViewById(R.id.btnMine);
+        mBtnMine.setCallbackListener(listener);
+    }
+
+    private class BtnListner implements IPointBtn.Change {
+        @Override
+        public void onShow(PointBtn v) {
+            switch (v.getId()) {
+                case R.id.btnCloud:
+                    BusLog.write("OWNCLOUD", " cloud show");
+                    break;
+                case R.id.btnLocal:
+                    BusLog.write("OWNCLOUD", " local show");
+                    break;
+                case R.id.btnMine:
+                    BusLog.write("OWNCLOUD", " mine show");
+                    break;
+            }
+        }
+
+        @Override
+        public void onDismiss(PointBtn v) {
+            switch (v.getId()) {
+                case R.id.btnCloud:
+                    BusLog.write("OWNCLOUD", " cloud dismiss");
+                    break;
+                case R.id.btnLocal:
+                    BusLog.write("OWNCLOUD", " local dismiss");
+                    break;
+                case R.id.btnMine:
+                    BusLog.write("OWNCLOUD", " mine dismiss");
+                    break;
+            }
+        }
     }
 
     @Override

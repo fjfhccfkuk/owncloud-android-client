@@ -12,7 +12,7 @@ public interface IPointBtn {
     }
 
     public interface Change {
-        public void onShow();
-        public void onDismiss();
+        public void onShow(PointBtn v);
+        public void onDismiss(PointBtn v);
     }
 }
