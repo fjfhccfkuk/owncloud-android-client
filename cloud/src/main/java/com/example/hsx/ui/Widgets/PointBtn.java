@@ -23,9 +23,13 @@ import java.util.List;
 
 public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickListener{
     private static List<IPointBtn.Forcus> mForcusList = new ArrayList<IPointBtn.Forcus>();
-    private static synchronized void ProcessForcusOff () {
-        for (IPointBtn.Forcus f : mForcusList)
-            f.forcusOff();
+    private static synchronized void ProcessForcusChange (IPointBtn.Forcus m) {
+        for (IPointBtn.Forcus f : mForcusList) {
+            if (m == f)
+                f.forcusOn();
+            else
+                f.forcusOff();
+        }
     }
 
     private static synchronized void AddForcus(IPointBtn.Forcus f) {
@@ -50,6 +54,7 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
     private Rect mDrawRect = null;
     private Paint mBackColorPaint = null;
     private int minSize = 0;
+    private IPointBtn.Change mCallbackListener = null;
 
     public PointBtn(Context c, AttributeSet attr) {
         super(c, attr);
@@ -65,6 +70,13 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
         AddForcus(this);
 
         this.setOnClickListener(this);
+    }
+
+    public void setCallbackListener (IPointBtn.Change l) {
+        if (l == null)
+            return;
+
+        mCallbackListener = l;
     }
 
     private void initDeclaredAttrs(TypedArray a) {
@@ -125,9 +137,9 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
         if (mDrawRect == null)
             mDrawRect = new Rect();
 
-        minSize = Math.min(getWidth(), getHeight());
+        minSize = Math.min(getWidth(), getHeight() - this.padTop);
 
-        mDrawRect.top = (getHeight() - minSize)/2;
+        mDrawRect.top = (getHeight() - minSize)/2 + this.padTop / 2;
         mDrawRect.bottom = mDrawRect.top + minSize;
 
         mDrawRect.left = (getWidth() - minSize) / 2;
@@ -138,7 +150,7 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(this.forcusOnColor);
+//        canvas.drawColor(this.forcusOnColor);
 
         if (this.mDrawableCur == null)
             return;
@@ -168,7 +180,6 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
 
     @Override
     public void onClick(View v) {
-        ProcessForcusOff();
-        forcusOn();
+        ProcessForcusChange(this);
     }
 }

@@ -3,10 +3,6 @@ package com.example.hsx.ui.Activities;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -15,6 +11,7 @@ import android.widget.TextView;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.ui.AdapterListview;
 import com.example.hsx.ui.IPictureView;
+import com.example.hsx.ui.Widgets.PointBtn;
 
 public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
 
@@ -25,8 +22,13 @@ public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
     private Thread imagDownloader = null;
     private ListAdapter mListAdapter = null;
 
+    private PointBtn mBtnLocal = null;
+    private PointBtn mBtnCloud = null;
+    private PointBtn mBtnMine = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -48,8 +50,6 @@ public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
             }
         });
 */
-
-
     }
 
     @Override

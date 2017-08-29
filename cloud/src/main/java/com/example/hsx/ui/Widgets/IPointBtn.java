@@ -10,4 +10,9 @@ public interface IPointBtn {
         public void forcusOn();
         public void forcusOff();
     }
+
+    public interface Change {
+        public void onShow();
+        public void onDismiss();
+    }
 }
