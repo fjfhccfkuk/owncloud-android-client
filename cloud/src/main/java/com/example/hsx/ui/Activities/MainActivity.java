@@ -1,27 +1,26 @@
 package com.example.hsx.ui.Activities;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.busap.utils.BusLog;
+import com.example.hsx.adapter.AdapterFragmentPager;
 import com.example.hsx.myapplication.R;
-import com.example.hsx.ui.AdapterListview;
 import com.example.hsx.ui.Fragments.CloudFragment;
 import com.example.hsx.ui.Fragments.LocalFragment;
 import com.example.hsx.ui.Fragments.MineFragment;
 import com.example.hsx.ui.IPictureView;
-import com.example.hsx.ui.Widgets.IPointBtn;
 import com.example.hsx.ui.Widgets.PointBtn;
 
-public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends BaseFragmentActivity implements IPictureView.ViewPic {
 
     private TextView mTxt = null;
     private ImageView mImg = null;
@@ -33,11 +32,10 @@ public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
     private PointBtn mBtnLocal = null;
     private PointBtn mBtnCloud = null;
     private PointBtn mBtnMine = null;
-    private FragmentManager mFragManager = null;
-    private Fragment mCloudFragment = null;
-    private Fragment mMineFragment = null;
+    private ViewPager mPager = null;
     private Fragment mLocalFragment = null;
-
+    private Fragment mCloudFragment = null;
+    private Fragment mMineFragment  = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +52,22 @@ public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
         mListAdapter = new AdapterListview(this);
         mListView.setAdapter(mListAdapter);
 */
+        mCloudFragment = new CloudFragment();
+        mMineFragment  = new MineFragment();
+        mLocalFragment = new LocalFragment();
 
-        BtnListner listener = new BtnListner();
+        List<Fragment> fl = new ArrayList<Fragment>();
 
-        mBtnCloud = (PointBtn) findViewById(R.id.btnCloud);
-        mBtnCloud.setCallbackListener(listener);
-        mBtnLocal = (PointBtn) findViewById(R.id.btnLocal);
-        mBtnLocal.setCallbackListener(listener);
-        mBtnMine = (PointBtn) findViewById(R.id.btnMine);
-        mBtnMine.setCallbackListener(listener);
+        fl.add(mLocalFragment);
+        fl.add(mCloudFragment);
+        fl.add(mMineFragment);
 
-        mFragManager = this.getFragmentManager();
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager.setAdapter(new AdapterFragmentPager(getSupportFragmentManager(), fl));
+        mPager.setCurrentItem(0);
     }
 
+/*
     private class BtnListner implements IPointBtn.Change {
         private void replaceFragment(FragmentManager fm, Fragment f) {
             if (fm == null)
@@ -121,6 +122,7 @@ public class MainActivity extends BaseActivity implements IPictureView.ViewPic {
             }
         }
     }
+*/
 
     @Override
     protected void onResume() {
