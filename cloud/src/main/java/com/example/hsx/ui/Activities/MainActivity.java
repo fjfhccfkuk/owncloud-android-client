@@ -1,20 +1,26 @@
 package com.example.hsx.ui.Activities;
 
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.busap.utils.BusLog;
 import com.example.hsx.adapter.AdapterFragmentPager;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.ui.Fragments.CloudFragment;
 import com.example.hsx.ui.Fragments.LocalFragment;
 import com.example.hsx.ui.Fragments.MineFragment;
 import com.example.hsx.ui.IPictureView;
+import com.example.hsx.ui.Widgets.IPointBtn;
 import com.example.hsx.ui.Widgets.PointBtn;
 
 import java.util.ArrayList;
@@ -52,6 +58,16 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
         mListAdapter = new AdapterListview(this);
         mListView.setAdapter(mListAdapter);
 */
+        mBtnLocal = (PointBtn) findViewById(R.id.btnLocal);
+        mBtnCloud = (PointBtn) findViewById(R.id.btnCloud);
+        mBtnMine  = (PointBtn) findViewById(R.id.btnMine);
+
+
+        List<PointBtn> btnList = new ArrayList<PointBtn>();
+        btnList.add(mBtnLocal);
+        btnList.add(mBtnCloud);
+        btnList.add(mBtnMine);
+
         mCloudFragment = new CloudFragment();
         mMineFragment  = new MineFragment();
         mLocalFragment = new LocalFragment();
@@ -65,44 +81,59 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new AdapterFragmentPager(getSupportFragmentManager(), fl));
         mPager.setCurrentItem(0);
+        mPager.addOnPageChangeListener(new PageChangedListener(btnList));
+
+        BtnListner btnListener = new BtnListner(mPager);
+        mBtnLocal.setCallbackListener(btnListener);
+        mBtnCloud.setCallbackListener(btnListener);
+        mBtnMine.setCallbackListener(btnListener);
     }
 
-/*
-    private class BtnListner implements IPointBtn.Change {
-        private void replaceFragment(FragmentManager fm, Fragment f) {
-            if (fm == null)
-                return;
-            if (f == null)
+    private class PageChangedListener implements ViewPager.OnPageChangeListener {
+        private List<PointBtn> mBtnList = null;
+
+        public PageChangedListener(List<PointBtn> l) {
+            this.mBtnList = l;
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            PointBtn c = this.mBtnList.get(position);
+
+            if (c == null)
                 return;
 
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.frame_root, f);
-            ft.commit();
+            c.performClick();
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    }
+
+
+    private class BtnListner implements IPointBtn.Change {
+        private ViewPager mPager = null;
+        public BtnListner(ViewPager p) {
+            this.mPager = p;
         }
 
         @Override
         public void onShow(PointBtn v) {
             switch (v.getId()) {
-                case R.id.btnCloud:
-                    BusLog.write("OWNCLOUD", " cloud show");
-                    if (mCloudFragment == null)
-                        mCloudFragment = new CloudFragment();
-
-                    replaceFragment(mFragManager, mCloudFragment);
-                    break;
                 case R.id.btnLocal:
-                    BusLog.write("OWNCLOUD", " local show");
-                    if (mLocalFragment == null)
-                        mLocalFragment = new LocalFragment();
-
-                    replaceFragment(mFragManager, mLocalFragment);
+                    this.mPager.setCurrentItem(0);
+                    break;
+                case R.id.btnCloud:
+                    this.mPager.setCurrentItem(1);
                     break;
                 case R.id.btnMine:
-                    BusLog.write("OWNCLOUD", " mine show");
-                    if (mMineFragment == null)
-                        mMineFragment = new MineFragment();
-
-                    replaceFragment(mFragManager, mMineFragment);
+                    this.mPager.setCurrentItem(2);
                     break;
             }
         }
@@ -122,7 +153,6 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
             }
         }
     }
-*/
 
     @Override
     protected void onResume() {
