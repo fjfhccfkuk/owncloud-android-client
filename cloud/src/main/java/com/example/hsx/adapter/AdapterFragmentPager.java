@@ -25,7 +25,7 @@ public class AdapterFragmentPager extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        BusLog.write("OWNCLOUD", " AdapterFragmentPager getItem()");
+//        BusLog.write("OWNCLOUD", " AdapterFragmentPager getItem()");
         return this.mFragmentList.get(position);
     }
 
