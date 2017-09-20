@@ -1,20 +1,14 @@
 package com.example.hsx.ui.Activities;
 
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.busap.utils.BusLog;
 import com.example.hsx.adapter.AdapterFragmentPager;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.ui.Fragments.CloudFragment;
@@ -45,6 +39,8 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
     private Fragment mCloudFragment = null;
     private Fragment mMineFragment  = null;
     private SearchBar mSearchBar = null;
+    private List<PointBtn> btnList = null;
+    private int mCurPagerIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +48,11 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-/*
-        mListView = (ListView) findViewById(R.id.listview);
-        mListView.setBackgroundColor(Color.GRAY);
-        mListAdapter = new AdapterListview(this);
-        mListView.setAdapter(mListAdapter);
-*/
         mBtnLocal = (PointBtn) findViewById(R.id.btnLocal);
         mBtnCloud = (PointBtn) findViewById(R.id.btnCloud);
         mBtnMine  = (PointBtn) findViewById(R.id.btnMine);
 
-
-        List<PointBtn> btnList = new ArrayList<PointBtn>();
+        btnList = new ArrayList<PointBtn>();
         btnList.add(mBtnLocal);
         btnList.add(mBtnCloud);
         btnList.add(mBtnMine);
@@ -83,7 +69,6 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(new AdapterFragmentPager(getSupportFragmentManager(), fl));
-        mPager.setCurrentItem(0);
         mPager.addOnPageChangeListener(new PageChangedListener(btnList));
 
         BtnListner btnListener = new BtnListner(mPager);
@@ -102,23 +87,22 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
         }
 
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
         @Override
         public void onPageSelected(int position) {
+            mCurPagerIndex = position;
             PointBtn c = this.mBtnList.get(position);
 
-            if (c == null)
+            if (c == null) {
                 return;
+            }
 
             c.performClick();
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
+        public void onPageScrollStateChanged(int state) {}
     }
 
 
@@ -132,18 +116,12 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
         public void onShow(PointBtn v) {
             switch (v.getId()) {
                 case R.id.btnLocal:
-                    if (mSearchBar.getVisibility() == View.INVISIBLE)
-                        mSearchBar.setVisibility(View.VISIBLE);
                     this.mPager.setCurrentItem(0);
                     break;
                 case R.id.btnCloud:
-                    if (mSearchBar.getVisibility() == View.INVISIBLE)
-                        mSearchBar.setVisibility(View.VISIBLE);
                     this.mPager.setCurrentItem(1);
                     break;
                 case R.id.btnMine:
-                    if (mSearchBar.getVisibility() == View.VISIBLE)
-                        mSearchBar.setVisibility(View.INVISIBLE);
                     this.mPager.setCurrentItem(2);
                     break;
             }
@@ -153,13 +131,13 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
         public void onDismiss(PointBtn v) {
             switch (v.getId()) {
                 case R.id.btnCloud:
-//                    BusLog.write("OWNCLOUD", " cloud dismiss");
+//                    HanLog.write("OWNCLOUD", " cloud dismiss");
                     break;
                 case R.id.btnLocal:
-//                    BusLog.write("OWNCLOUD", " local dismiss");
+//                    HanLog.write("OWNCLOUD", " local dismiss");
                     break;
                 case R.id.btnMine:
-//                    BusLog.write("OWNCLOUD", " mine dismiss");
+//                    HanLog.write("OWNCLOUD", " mine dismiss");
                     break;
             }
         }
@@ -168,6 +146,19 @@ public class MainActivity extends BaseFragmentActivity implements IPictureView.V
     @Override
     protected void onResume() {
         super.onResume();
+
+
+        mPager.setCurrentItem(mCurPagerIndex);
+        if (btnList == null) {
+            return;
+        }
+
+        PointBtn btn = btnList.get(mCurPagerIndex);
+        if (btn == null) {
+            return;
+        }
+
+        btn.performClick();
     }
 
     @Override

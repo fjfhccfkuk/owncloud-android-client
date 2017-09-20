@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
-import com.busap.utils.BusLog;
 import com.example.hsx.myapplication.R;
 
 /**
@@ -25,8 +24,6 @@ public class SearchBar extends RelativeLayout {
 
         initView(this.mCtx, R.layout.search_bar_layout);
         mBtn = (ImageButton) findViewById(R.id.toolBtn);
-
-        BusLog.write("OWNCLOUD", " SearchBar create");
     }
 
     @Override

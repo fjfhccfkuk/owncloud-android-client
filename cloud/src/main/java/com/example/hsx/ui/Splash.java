@@ -5,15 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.busap.utils.BusLog;
+import com.han.utils.HanLog;
 import com.example.hsx.data.models.PrivCloudAccount;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.ui.Activities.BaseActivity;
 import com.example.hsx.ui.Activities.LoginActivity;
 import com.example.hsx.ui.Activities.MainActivity;
-import com.example.hsx.ui.Activities.TestActivity;
 
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class Splash extends BaseActivity {
 
         List<PrivCloudAccount> accounts = getAccounts(this);
         if (accounts == null || accounts.size() <= 0) {
-            BusLog.write("OWNCLOUD", " accounts:" + accounts.toString());
+            HanLog.write("OWNCLOUD", "Splash  accounts:" + accounts.toString());
             //跳转登录界面
 
             Intent i = new Intent();
@@ -97,7 +95,7 @@ public class Splash extends BaseActivity {
         Intent i = new Intent();
         i.setClass(this, LoginActivity.class);
 
-        Log.i("OWNCLOUD", "onResume");
+        HanLog.write("OWNCLOUD", "Splash onResume");
 //        PendingIntent pi = PendingIntent.getActivities(this, 990, new Intent[]{i}, PendingIntent.FLAG_CANCEL_CURRENT);
 
 //        new Thread(new JumpRunnable(pi)).start();
@@ -106,13 +104,13 @@ public class Splash extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i("OWNCLOUD", "onPause");
+        HanLog.write("OWNCLOUD", "Splash onPause");
         finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i("OWNCLOUD", "onDestroy");
+        HanLog.write("OWNCLOUD", "Splash onDestroy");
     }
 }

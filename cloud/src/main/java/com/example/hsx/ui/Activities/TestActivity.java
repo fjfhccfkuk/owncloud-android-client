@@ -5,21 +5,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
-import android.view.Surface;
 import android.view.SurfaceView;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.busap.utils.BusDelay;
-import com.busap.utils.BusLog;
-import com.example.hsx.myapplication.R;
+import com.han.utils.HanDelay;
+import com.han.utils.HanLog;
 
 /**
  * Created by hsx on 17-8-27.
@@ -34,7 +27,7 @@ public class TestActivity extends BaseActivity {
 
         SurfaceView sv = new SurfaceView(this);
 
-        BusLog.write("OWNCLOUD", " TestActivity onCreate");
+        HanLog.write("OWNCLOUD", " TestActivity onCreate");
         ImageView iv = new ImageView(this);
         Bitmap bmp = BitmapFactory.decodeFile("//sdcard/moon.png");
 //        iv.setImageBitmap(bmp);
@@ -59,7 +52,7 @@ public class TestActivity extends BaseActivity {
         @Override
         public void run() {
 
-            BusDelay.delay_s(10);
+            HanDelay.delay_s(10);
 
             Canvas c = this.sv.getHolder().lockCanvas();
 

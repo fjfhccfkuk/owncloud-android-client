@@ -1,14 +1,14 @@
 package com.example.hsx.ui.Activities;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.busap.utils.BusDelay;
+import com.han.utils.HanDelay;
 import com.example.hsx.data.models.PrivCloudAccount;
 import com.example.hsx.ui.Jump;
 
@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * Created by hsx on 17-8-14.
  */
 
-public class BaseActivity extends Activity {
+public class BaseActivity extends AppCompatActivity {
     private static final String PRIV_DATA = "owncloud";
     private static SharedPreferences ownPreference = null;
     private static List<PrivCloudAccount> listAccount = new ArrayList<PrivCloudAccount>();
@@ -85,7 +85,7 @@ public class BaseActivity extends Activity {
         @Override
         public void run() {
             try {
-                BusDelay.delay_s(this.delayTime);
+                HanDelay.delay_s(this.delayTime);
                 try {
                     this.mPi.send();
                 } catch (Exception e){}

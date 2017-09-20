@@ -6,4 +6,6 @@
     <color name="login_btn">#529051fd</color>
     <color name="sqlash_bg">#ff90ddca</color>
     <color name="pointBtn">#990088cc</color>
+    <color name="local_item_pressed">#89ece9e9</color>
+    <color name="local_item_released">#88c4bcbc</color>
 </resources>

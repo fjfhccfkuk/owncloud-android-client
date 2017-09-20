@@ -4,11 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.busap.utils.BusLog;
-import com.example.hsx.ui.Fragments.CloudFragment;
-import com.example.hsx.ui.Fragments.LocalFragment;
-import com.example.hsx.ui.Fragments.MineFragment;
-
 import java.util.List;
 
 /**
@@ -25,7 +20,7 @@ public class AdapterFragmentPager extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-//        BusLog.write("OWNCLOUD", " AdapterFragmentPager getItem()");
+//        HanLog.write("OWNCLOUD", " AdapterFragmentPager getItem()");
         return this.mFragmentList.get(position);
     }
 

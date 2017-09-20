@@ -1,13 +1,10 @@
 package com.example.hsx.data.remote;
 import android.graphics.Bitmap;
-import android.net.Network;
-import android.provider.ContactsContract;
-import android.provider.Telephony;
 import android.util.Log;
 
-import com.android.volley.RequestQueue;
 import com.example.hsx.data.DataSource;
-import com.example.hsx.data.models.OwnPicture;
+import com.example.hsx.data.models.PrivImages;
+import com.example.hsx.data.models.PrivMedia;
 
 /**
  * Created by hsx on 17-8-7.
@@ -45,9 +42,9 @@ public class RemoteDataSource extends DataSource {
         mNet.request(url, new DataResponse(c){
             @Override
             void onResponse(PhotoCallback b, Bitmap s) {
-                OwnPicture op = new OwnPicture();
-                op.setBitmap(s);
-                b.onSuccess(op);
+                PrivMedia op = new PrivImages();
+//                op.setBitmap(s);
+//                b.onSuccess(op);
             }
 
             @Override

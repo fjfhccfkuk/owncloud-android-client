@@ -2,7 +2,7 @@ package com.example.hsx.presenter;
 
 import com.example.hsx.data.DataRepository;
 import com.example.hsx.data.DataSource;
-import com.example.hsx.data.models.OwnPicture;
+import com.example.hsx.data.models.PrivMedia;
 import com.example.hsx.ui.OwnText;
 
 /**
@@ -25,7 +25,7 @@ public class OwnPicTextPresenter implements OwnText.Presenter{
         if (mData != null) {
             mData.getPhoto(index, new DataSource.PhotoCallback() {
                 @Override
-                public void onSuccess(OwnPicture p) {
+                public void onSuccess(PrivMedia p) {
                     mTxt.showText(p.getName());
                 }
 

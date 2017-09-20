@@ -1,15 +1,13 @@
 package com.example.hsx.ui.Activities;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
 
-import com.busap.utils.BusDelay;
+import com.han.utils.HanDelay;
 import com.example.hsx.data.models.PrivCloudAccount;
 import com.example.hsx.ui.Jump;
 
@@ -61,11 +59,11 @@ public class BaseFragmentActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
 
-        getWindow().getDecorView().setSystemUiVisibility(
+/*        getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_FULLSCREEN|
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        );
+        );*/
     }
 
     private static class JumpRunnable implements Runnable {
@@ -86,7 +84,7 @@ public class BaseFragmentActivity extends FragmentActivity {
         @Override
         public void run() {
             try {
-                BusDelay.delay_s(this.delayTime);
+                HanDelay.delay_s(this.delayTime);
                 try {
                     this.mPi.send();
                 } catch (Exception e){}

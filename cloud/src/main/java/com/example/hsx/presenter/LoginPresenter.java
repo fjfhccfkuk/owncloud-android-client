@@ -1,12 +1,7 @@
 package com.example.hsx.presenter;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 
-import com.busap.utils.BusDelay;
-import com.example.hsx.ui.Dialog.LoginProcessDialog;
 import com.example.hsx.ui.Dialog.ProcessDialog;
 
 import java.lang.ref.WeakReference;

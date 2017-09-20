@@ -4,12 +4,12 @@
 
 package com.example.hsx.data;
 
-import com.example.hsx.data.models.OwnPicture;
+import com.example.hsx.data.models.PrivMedia;
 
 public abstract class DataSource {
 
     public interface PhotoCallback {
-        void onSuccess(OwnPicture p);
+        void onSuccess(PrivMedia p);
         void onError(String s);
     }
 

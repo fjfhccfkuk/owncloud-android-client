@@ -1,5 +1,7 @@
 package com.example.hsx.presenter;
 
+import android.database.Cursor;
+
 import com.example.hsx.ui.Dialog.LoginProcessDialog;
 
 /**
@@ -11,5 +13,9 @@ public abstract class Presenter {
     public interface Login {
         void login();
         void interrupt();
+    }
+
+    public interface PictureListView {
+        void update(Cursor c);
     }
 }

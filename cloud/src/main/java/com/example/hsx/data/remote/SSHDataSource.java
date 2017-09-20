@@ -3,7 +3,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.example.hsx.data.DataSource;
-import com.example.hsx.data.models.OwnPicture;
+import com.example.hsx.data.models.PrivMedia;
 
 /**
  * Created by hsx on 17-8-7.
@@ -41,9 +41,9 @@ public class SSHDataSource extends DataSource {
         mNet.request(url, new DataResponse(c){
             @Override
             void onResponse(PhotoCallback b, Bitmap s) {
-                OwnPicture op = new OwnPicture();
+/*                PrivMedia op = new PrivMedia();
                 op.setBitmap(s);
-                b.onSuccess(op);
+                b.onSuccess(op);*/
             }
 
             @Override

@@ -3,7 +3,7 @@ package com.example.hsx.ui.Activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.busap.utils.BusLog;
+import com.han.utils.HanLog;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.presenter.LoginPresenter;
 import com.example.hsx.presenter.Presenter;
@@ -69,11 +69,11 @@ public class LoginActivity extends BaseActivity {
 
             //    switch (resCode)
                 {
-                    BusLog.write("OWNCLOUD", " response Code:" + resCode);
+                    HanLog.write("OWNCLOUD", " response Code:" + resCode);
                 }
 
             } catch (Exception e){
-                BusLog.write("OWNCLOUD", " response Excp:" + e.toString());
+                HanLog.write("OWNCLOUD", " response Excp:" + e.toString());
             }
         }
     }

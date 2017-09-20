@@ -8,8 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.hsx.myapplication.R;
@@ -62,7 +60,7 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
         this.mCtx = c;
         this.mAtts = attr;
 
-//        BusLog.write("OWNCLOUD", " PointBtn(2)");
+//        HanLog.write("OWNCLOUD", " PointBtn(2)");
         initDeclaredAttrs(this.mCtx.obtainStyledAttributes(this.mAtts, R.styleable.PointBtn));
         mBackColorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -88,7 +86,7 @@ public class PointBtn extends View implements IPointBtn.Forcus, View.OnClickList
         int i = 0;
         for (i = 0; i < count; i ++) {
             int index = a.getIndex(i);
-//            BusLog.write("OWNCLOUD", "count:" + count + " index:" + index + " i:" + i);
+//            HanLog.write("OWNCLOUD", "count:" + count + " index:" + index + " i:" + i);
 
             switch (index) {
                 case R.styleable.PointBtn_forcusOffDraw:

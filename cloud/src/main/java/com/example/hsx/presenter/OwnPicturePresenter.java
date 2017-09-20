@@ -5,9 +5,8 @@ import android.widget.ImageView;
 
 import com.example.hsx.data.DataRepository;
 import com.example.hsx.data.DataSource;
-import com.example.hsx.data.models.OwnPicture;
+import com.example.hsx.data.models.PrivMedia;
 import com.example.hsx.ui.IPictureView;
-import com.example.hsx.ui.OwnText;
 
 /**
  * Created by hsx on 17-8-7.
@@ -48,8 +47,8 @@ public class OwnPicturePresenter implements IPictureView.Presenter{
         }
 
         @Override
-        public void onSuccess(OwnPicture p) {
-            onPhotoSucc(obj, p.getBitmap());
+        public void onSuccess(PrivMedia p) {
+     //       onPhotoSucc(obj, p.getBitmap());
         }
 
         @Override

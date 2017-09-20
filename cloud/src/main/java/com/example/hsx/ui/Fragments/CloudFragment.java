@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.busap.utils.BusLog;
+import com.han.utils.HanLog;
 import com.example.hsx.myapplication.R;
 
 /**
@@ -20,25 +20,25 @@ public class CloudFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        BusLog.write("OWNCLOUD", " CloudFragment onCreate");
+        HanLog.write("OWNCLOUD", " CloudFragment onCreate");
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        BusLog.write("OWNCLOUD", " CloudFragment onAttach");
+        HanLog.write("OWNCLOUD", " CloudFragment onAttach");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        BusLog.write("OWNCLOUD", " CloudFragment onDestroyView");
+        HanLog.write("OWNCLOUD", " CloudFragment onDestroyView");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        BusLog.write("OWNCLOUD", " CloudFragment onDetach");
+        HanLog.write("OWNCLOUD", " CloudFragment onDetach");
     }
 
     @Nullable

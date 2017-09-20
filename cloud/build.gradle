@@ -34,5 +34,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/volley.jar')
     compile project(':owncloud')
-    compile project(':BusLib')
+    compile project(':HanLib')
 }
