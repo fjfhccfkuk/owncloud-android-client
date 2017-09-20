@@ -45,9 +45,9 @@ public class LocalPictureActivity extends BaseActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
 
-        mAdapter = new LocalPictureListViewAdapter();
+        mAdapter = new LocalPictureListViewAdapter(this);
         mListView = new PictureListView(this);
-        mListView.setBackgroundColor(Color.BLUE);
+//        mListView.setBackgroundColor(Color.BLUE);
         addContentView(mListView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         mListView.setAdapter(mAdapter);

@@ -58,11 +58,9 @@ public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCa
 
         HanLog.write("OWNCLOUD", " PictureLoaderCallback() onLoadFinished() data rows:" + dataCount + " columns:" + dataColumn);
 
-        if (this.mAdapter != null)
-            this.mAdapter.update(data);
 
-        data.close();
-     /*   for (int i = 0; i < dataCount; i ++) {
+ //       data.close();
+/*        for (int i = 0; i < dataCount; i ++) {
             data.moveToNext();
 
             StringBuilder columnInfo = new StringBuilder();
@@ -71,17 +69,11 @@ public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCa
                 columnInfo.append("col:" + colName + " value:" + data.getString(data.getColumnIndex(colName)) + "\n");
             }
 
-*//*            int numberIndex = data.getColumnIndex(NUMBER);
-
-            if (numberIndex < 0) {
-                columnInfo.append("There is no index of column \"NUMBER\"");
-                HanLog.write("OWNCLOUD", " PictureLoaderCallback() There is no index of column \"NUMBER\"");
-            } else {
-                columnInfo.append(" col[" + 0 + "]:" + data.getString(numberIndex));
-            }*//*
-
             HanLog.writeDisk("OWNCLOUD", " PictureLoaderCallback() rows:" + i + "\n" + columnInfo);
         }*/
+
+        if (this.mAdapter != null)
+            this.mAdapter.update(data);
     }
 
     @Override
