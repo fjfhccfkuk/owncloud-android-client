@@ -6,15 +6,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.hsx.presenter.Presenter;
+import com.han.utils.HanLog;
 
 /**
  * Created by hsx on 17-9-20.
  */
 
-public class LocalPictureListViewAdapter extends BaseAdapter implements Presenter.PictureListView{
+public class LocalPictureListViewAdapter extends BaseAdapter implements Presenter.PictureListViewAdapter{
+
+    private int picSize = 0;
+
+
     @Override
     public int getCount() {
-        return 0;
+        return 0;//picSize;
     }
 
     @Override
@@ -34,10 +39,8 @@ public class LocalPictureListViewAdapter extends BaseAdapter implements Presente
 
     @Override
     public void update(Cursor c) {
-
-    }
-
-    public interface Presenter {
-        void start();
+        picSize = c.getCount();
+        notifyDataSetChanged();
+        HanLog.write("OWNCLOUD", " LocalPictureListViewAdapter.update() picSize:" + picSize);
     }
 }

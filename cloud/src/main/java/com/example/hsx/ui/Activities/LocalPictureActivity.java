@@ -3,11 +3,17 @@ package com.example.hsx.ui.Activities;
 import android.Manifest;
 import android.app.PendingIntent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.hsx.adapter.LocalPictureListViewAdapter;
+import com.example.hsx.presenter.Presenter;
+import com.example.hsx.ui.Fragments.local.PictureListView;
 import com.example.hsx.ui.Fragments.local.PictureLoaderCallback;
 import com.han.utils.HanDelay;
 import com.han.utils.HanLog;
@@ -22,6 +28,9 @@ import java.util.List;
 public class LocalPictureActivity extends BaseActivity {
 
     private Thread th = null;
+    private LocalPictureListViewAdapter mAdapter = null;
+    private ListView mListView = null;
+
     @Override
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +44,13 @@ public class LocalPictureActivity extends BaseActivity {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
+
+        mAdapter = new LocalPictureListViewAdapter();
+        mListView = new PictureListView(this);
+        mListView.setBackgroundColor(Color.BLUE);
+        addContentView(mListView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+        mListView.setAdapter(mAdapter);
 
         permissionReq(perms);
     }
@@ -74,7 +90,7 @@ public class LocalPictureActivity extends BaseActivity {
 
     private void initLoaderManager() {
 //        getSupportLoaderManager();
-        getLoaderManager().initLoader(2, null, new PictureLoaderCallback(this));
+        getLoaderManager().initLoader(2, null, new PictureLoaderCallback(this, this.mAdapter));
     }
 
     @Override

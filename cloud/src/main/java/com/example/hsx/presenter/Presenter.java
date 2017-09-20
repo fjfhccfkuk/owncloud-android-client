@@ -16,6 +16,10 @@ public abstract class Presenter {
     }
 
     public interface PictureListView {
+        void start();
+    }
+
+    public interface PictureListViewAdapter {
         void update(Cursor c);
     }
 }

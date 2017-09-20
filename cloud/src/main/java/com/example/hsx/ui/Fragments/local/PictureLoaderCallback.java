@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
+
+import com.example.hsx.presenter.Presenter;
 import com.han.utils.HanLog;
 
 
@@ -21,9 +23,11 @@ import com.han.utils.HanLog;
 public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
     private Context mCtx = null;
+    private Presenter.PictureListViewAdapter mAdapter = null;
 
-    public PictureLoaderCallback(Context c) {
+    public PictureLoaderCallback(Context c, Presenter.PictureListViewAdapter adapter) {
         this.mCtx = c;
+        mAdapter = adapter;
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -51,8 +55,14 @@ public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCa
         int dataCount = data.getCount();
         int dataColumn = data.getColumnCount();
 
-        HanLog.write("OWNCLOUD", " PictureLoaderCallback() onLoadFinished() data rows:" + data.getCount() + " columns:" + data.getColumnCount());
-        for (int i = 0; i < dataCount; i ++) {
+
+        HanLog.write("OWNCLOUD", " PictureLoaderCallback() onLoadFinished() data rows:" + dataCount + " columns:" + dataColumn);
+
+        if (this.mAdapter != null)
+            this.mAdapter.update(data);
+
+        data.close();
+     /*   for (int i = 0; i < dataCount; i ++) {
             data.moveToNext();
 
             StringBuilder columnInfo = new StringBuilder();
@@ -61,17 +71,17 @@ public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCa
                 columnInfo.append("col:" + colName + " value:" + data.getString(data.getColumnIndex(colName)) + "\n");
             }
 
-/*            int numberIndex = data.getColumnIndex(NUMBER);
+*//*            int numberIndex = data.getColumnIndex(NUMBER);
 
             if (numberIndex < 0) {
                 columnInfo.append("There is no index of column \"NUMBER\"");
                 HanLog.write("OWNCLOUD", " PictureLoaderCallback() There is no index of column \"NUMBER\"");
             } else {
                 columnInfo.append(" col[" + 0 + "]:" + data.getString(numberIndex));
-            }*/
+            }*//*
 
             HanLog.writeDisk("OWNCLOUD", " PictureLoaderCallback() rows:" + i + "\n" + columnInfo);
-        }
+        }*/
     }
 
     @Override
