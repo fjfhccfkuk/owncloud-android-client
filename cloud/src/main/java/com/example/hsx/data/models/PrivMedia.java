@@ -8,9 +8,10 @@ import java.util.Date;
 public abstract class PrivMedia {
 
     private PrivMediaType type;
+    private String dataBelongTo = null;
     private String picName;
     private String absolutePath = null;
-    private Date createTime = null;
+    private int createdTimeStamp = 0;
 
     private int height = 0;
     private int width  = 0;
@@ -89,6 +90,22 @@ public abstract class PrivMedia {
 
     public int getSize() {
         return this.size;
+    }
+
+    public void setCreatedTimeStamp(int ts) {
+        this.createdTimeStamp = ts;
+    }
+
+    public int getCreatedTimeStamp() {
+        return this.createdTimeStamp;
+    }
+
+    public void setBelongTo(String t) {
+        this.dataBelongTo = t;
+    }
+
+    public String getBelongTo() {
+        return this.dataBelongTo;
     }
 
     public enum  PrivMediaType {
