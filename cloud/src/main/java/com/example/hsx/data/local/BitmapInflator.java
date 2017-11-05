@@ -3,15 +3,14 @@ package com.example.hsx.data.local;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.example.hsx.data.DataInflator;
+import com.example.hsx.data.cache.MemCache;
 import com.example.hsx.data.models.BitmapInfo;
 import com.example.hsx.data.models.PrivImages;
 import com.example.hsx.data.models.PrivMedia;
@@ -21,7 +20,6 @@ import com.han.utils.HanLog;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -39,13 +37,13 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
     private int max_size = 0;
     private int sharinkResolution = 128; //320 pix
     private Map<Integer, Bitmap> mThumbnail = null;
-    private LruCache<String, Bitmap> bmpMemcache = null;
+    private MemCache<String, Bitmap> bmpMemcache = null;
 
     private BitmapInflator(){
         mViewMap = new TreeMap<Integer, ImageView>();
         mSrcList  = new ArrayList<>();
         mThumbnail = new HashMap<>();
-        bmpMemcache = new LruCache<>((int)(Runtime.getRuntime().maxMemory() / 1024 / 8));
+        bmpMemcache = new MemCache<>();//new LruCache<>((int)(Runtime.getRuntime().maxMemory() / 1024 / 8));
 
         mTask = new Thread(new InflaterRunnable());
         mTask.start();
@@ -71,7 +69,7 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
         do {
 //            bmp = mThumbnail.get(pos);
             picName = mSrcList.get(pos).getName();
-            bmp = bmpMemcache.get(picName);
+            bmp = bmpMemcache.getData(picName);
             if (bmp != null)
                 break;
             synchronized (mTask) {
@@ -252,14 +250,14 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
 
             do {
 //                bitmap = mThumbnail.get(pos);
-                bitmap = bmpMemcache.get(media.getName());
+                bitmap = bmpMemcache.getData(media.getName());
                 if (bitmap != null)
                     break;
 
                 size = Math.max(media.getWidth(), media.getHeight());
                 if (size > sharinkResolution) {
                     bitmap = thumbnail(media.getPath(), media.getWidth(), media.getHeight());
-                    bmpMemcache.put(media.getName(), bitmap);
+                    bmpMemcache.setData(media.getName(), bitmap);
 //                    mThumbnail.put(pos, bitmap);
                 } else {
                     bitmap = BitmapFactory.decodeFile(media.getPath());
