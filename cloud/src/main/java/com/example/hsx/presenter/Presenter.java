@@ -19,7 +19,7 @@ public abstract class Presenter {
         void start();
     }
 
-    public interface PictureListViewAdapter {
+    public interface PictureViewAdapter {
         void update(Cursor c);
     }
 }

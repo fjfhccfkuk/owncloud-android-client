@@ -1,5 +1,6 @@
 package com.example.hsx.ui.Activities;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,7 +22,7 @@ import java.util.concurrent.Executors;
  * Created by hsx on 17-8-14.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends Activity {
     private static final String PRIV_DATA = "owncloud";
     private static SharedPreferences ownPreference = null;
     private static List<PrivCloudAccount> listAccount = new ArrayList<PrivCloudAccount>();
@@ -55,6 +56,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
     }
+
+
 
     @Override
     protected void onResume() {

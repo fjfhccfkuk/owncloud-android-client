@@ -46,7 +46,7 @@
 
         <activity android:name="com.example.hsx.ui.Activities.MainActivity" />
         <activity android:name="com.example.hsx.ui.Activities.TestActivity" />
-        <activity android:name="com.example.hsx.ui.Activities.LocalPictureActivity" />
+        <activity android:name="com.example.hsx.ui.Activities.local.LocalPictureActivity" />
     </application>
 
 </manifest>

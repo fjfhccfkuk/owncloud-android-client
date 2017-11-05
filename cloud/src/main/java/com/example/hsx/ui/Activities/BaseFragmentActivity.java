@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
-import com.han.utils.HanDelay;
 import com.example.hsx.data.models.PrivCloudAccount;
 import com.example.hsx.ui.Jump;
+import com.han.utils.HanDelay;
 
 import java.util.ArrayList;
 import java.util.List;

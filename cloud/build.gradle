@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.example.hsx.myapplication"
         minSdkVersion 17
@@ -18,7 +18,7 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java']
+            java.srcDirs = ['src/main/java', 'src/main/java/com/example/hsx/ui/Activities/cloud']
         }
     }
 }

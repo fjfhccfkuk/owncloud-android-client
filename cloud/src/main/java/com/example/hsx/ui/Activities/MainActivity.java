@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import com.example.hsx.adapter.AdapterFragmentPager;
 import com.example.hsx.myapplication.R;
-import com.example.hsx.ui.Fragments.CloudFragment;
-import com.example.hsx.ui.Fragments.LocalFragment;
-import com.example.hsx.ui.Fragments.MineFragment;
+import com.example.hsx.ui.Fragments.cloud.CloudFragment;
+import com.example.hsx.ui.Fragments.local.LocalFragment;
+import com.example.hsx.ui.Fragments.mine.MineFragment;
 import com.example.hsx.ui.IPictureView;
 import com.example.hsx.ui.Widgets.IPointBtn;
 import com.example.hsx.ui.Widgets.PointBtn;

@@ -3,6 +3,8 @@
  */
 package com.example.hsx.data.models;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 public abstract class PrivMedia {

@@ -8,10 +8,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract.Contacts;
-import android.provider.MediaStore;
 import android.provider.MediaStore.Images;
 
+import com.example.hsx.data.DataInflator;
 import com.example.hsx.presenter.Presenter;
 import com.han.utils.HanLog;
 
@@ -23,11 +22,11 @@ import com.han.utils.HanLog;
 public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCallbacks<Cursor> {
 
     private Context mCtx = null;
-    private Presenter.PictureListViewAdapter mAdapter = null;
+    private DataInflator.LocalPicLoader bitmapLoader = null;
 
-    public PictureLoaderCallback(Context c, Presenter.PictureListViewAdapter adapter) {
+    public PictureLoaderCallback(Context c, DataInflator.LocalPicLoader  loader) {
         this.mCtx = c;
-        mAdapter = adapter;
+        bitmapLoader = loader;
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -56,7 +55,7 @@ public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCa
         int dataColumn = data.getColumnCount();
 
 
-        HanLog.write("OWNCLOUD", " PictureLoaderCallback() onLoadFinished() data rows:" + dataCount + " columns:" + dataColumn);
+//        HanLog.write("OWNCLOUD", " PictureLoaderCallback() onLoadFinished() data rows:" + dataCount + " columns:" + dataColumn);
 
 
  //       data.close();
@@ -72,8 +71,8 @@ public class PictureLoaderCallback implements android.app.LoaderManager.LoaderCa
             HanLog.writeDisk("OWNCLOUD", " PictureLoaderCallback() rows:" + i + "\n" + columnInfo);
         }*/
 
-        if (this.mAdapter != null)
-            this.mAdapter.update(data);
+        if (this.bitmapLoader != null)
+            this.bitmapLoader.update(data);
     }
 
     @Override

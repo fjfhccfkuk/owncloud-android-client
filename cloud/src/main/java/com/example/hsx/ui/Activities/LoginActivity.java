@@ -3,6 +3,7 @@ package com.example.hsx.ui.Activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.example.hsx.ui.Activities.BaseActivity;
 import com.han.utils.HanLog;
 import com.example.hsx.myapplication.R;
 import com.example.hsx.presenter.LoginPresenter;
