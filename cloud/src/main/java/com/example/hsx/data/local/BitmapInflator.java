@@ -222,10 +222,10 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
                             break;
                         }
                     }
+
+                    mViewMap.clear();
                 } catch (Exception e){
                     HanLog.write("OWNCLOUD", "[bitmap inflator] excp:" + e.toString());
-                } finally {
-                    mViewMap.clear();
                 }
             }
         }
