@@ -10,7 +10,7 @@ import android.os.Message;
 import android.widget.ImageView;
 
 import com.example.hsx.data.DataInflator;
-import com.example.hsx.data.cache.MemCache;
+import com.example.hsx.data.cache.BitmapCache;
 import com.example.hsx.data.models.BitmapInfo;
 import com.example.hsx.data.models.PrivImages;
 import com.example.hsx.data.models.PrivMedia;
@@ -37,13 +37,13 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
     private int max_size = 0;
     private int sharinkResolution = 128; //320 pix
     private Map<Integer, Bitmap> mThumbnail = null;
-    private MemCache<String, Bitmap> bmpMemcache = null;
+    private BitmapCache bmpMemcache = null;
 
     private BitmapInflator(){
         mViewMap = new TreeMap<Integer, ImageView>();
         mSrcList  = new ArrayList<>();
         mThumbnail = new HashMap<>();
-        bmpMemcache = new MemCache<>();//new LruCache<>((int)(Runtime.getRuntime().maxMemory() / 1024 / 8));
+        bmpMemcache = new BitmapCache();//new LruCache<>((int)(Runtime.getRuntime().maxMemory() / 1024 / 8));
 
         mTask = new Thread(new InflaterRunnable());
         mTask.start();
@@ -69,7 +69,7 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
         do {
 //            bmp = mThumbnail.get(pos);
             picName = mSrcList.get(pos).getName();
-            bmp = bmpMemcache.getData(picName);
+            bmp = bmpMemcache.get(picName);
             if (bmp != null)
                 break;
             synchronized (mTask) {
@@ -250,14 +250,14 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
 
             do {
 //                bitmap = mThumbnail.get(pos);
-                bitmap = bmpMemcache.getData(media.getName());
+                bitmap = bmpMemcache.get(media.getName());
                 if (bitmap != null)
                     break;
 
                 size = Math.max(media.getWidth(), media.getHeight());
                 if (size > sharinkResolution) {
                     bitmap = thumbnail(media.getPath(), media.getWidth(), media.getHeight());
-                    bmpMemcache.setData(media.getName(), bitmap);
+                    bmpMemcache.set(media.getName(), bitmap);
 //                    mThumbnail.put(pos, bitmap);
                 } else {
                     bitmap = BitmapFactory.decodeFile(media.getPath());
