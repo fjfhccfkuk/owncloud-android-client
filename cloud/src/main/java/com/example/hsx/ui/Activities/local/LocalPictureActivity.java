@@ -54,7 +54,7 @@ public class LocalPictureActivity extends BaseActivity {
         mGridView = (GridView) LayoutInflater.from(this).inflate(R.layout.local_picture_view_grid, null); //new PictureGridView(this);
 
 
-        bitmapInflator = BitmapInflator.getInstance();
+        bitmapInflator = BitmapInflator.getInstance(this);
         mAdapter = new LocalPictureGridViewAdapter(this, BitmapRecycle.getInstance(), bitmapInflator);//new LocalPictureViewAdapter(this));
 /*        mListView = new PictureListView(this);
         addContentView(mListView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));

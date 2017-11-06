@@ -1,5 +1,6 @@
 package com.example.hsx.data.cache;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 /**
@@ -9,10 +10,11 @@ import android.graphics.Bitmap;
 public class BitmapCache {
     private MemCache<String, Bitmap> memCache = null;
     private DiskCache<String, Bitmap> diskCache = null;
+    private Context mCtx = null;
 
-    public BitmapCache () {
+    public BitmapCache (Context c) {
         memCache = new MemCache<String, Bitmap>();
-        diskCache = new DiskCache<String, Bitmap>(null);
+        diskCache = new DiskCache<String, Bitmap>(c);
     }
 
     public Bitmap get(String k) {

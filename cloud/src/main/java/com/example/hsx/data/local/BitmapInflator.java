@@ -1,5 +1,6 @@
 package com.example.hsx.data.local;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,18 +39,20 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
     private int sharinkResolution = 128; //320 pix
     private Map<Integer, Bitmap> mThumbnail = null;
     private BitmapCache bmpMemcache = null;
+    private static Context mCtx = null;
 
     private BitmapInflator(){
         mViewMap = new TreeMap<Integer, ImageView>();
         mSrcList  = new ArrayList<>();
         mThumbnail = new HashMap<>();
-        bmpMemcache = new BitmapCache();//new LruCache<>((int)(Runtime.getRuntime().maxMemory() / 1024 / 8));
+        bmpMemcache = new BitmapCache(mCtx);//new LruCache<>((int)(Runtime.getRuntime().maxMemory() / 1024 / 8));
 
         mTask = new Thread(new InflaterRunnable());
         mTask.start();
     }
 
-    public static BitmapInflator getInstance() {
+    public static BitmapInflator getInstance(Context c) {
+        mCtx = c;
         return mInflator;
     }
 

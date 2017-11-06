@@ -13,12 +13,13 @@ import java.io.File;
 
 public class DiskCache<K, V> implements IAppCache<V, K>, IDisakCache<K, V> {
     private File cacheDir = null;
-    private DiskLruCache diskCache1 = null;
+    private DiskLruCache diskCache = null;
 
     public DiskCache(Context c) {
         cacheDir = getCacheDir(c);
-        try {
 
+        try {
+            diskCache = DiskLruCache.open(cacheDir, 1299, 1024, 1024 * 1024 * 10);
         } catch (Exception e){
             HanLog.write("OWNCLOUD", "DiskCache init excp:" + e.toString());
         }
