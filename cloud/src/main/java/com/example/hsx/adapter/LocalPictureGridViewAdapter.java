@@ -72,6 +72,8 @@ public class LocalPictureGridViewAdapter extends BaseAdapter {
             this.mBitmapInflator.setSize(maxCellSize);
         } else {
             v = convertView;
+            Bitmap tag = (Bitmap)v.getTag();
+            mRecycle.add(tag);
         }
 
         ((ImageView)v).setImageBitmap(null);

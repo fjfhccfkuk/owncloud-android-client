@@ -39,7 +39,7 @@ public class DiskCache<K, V> implements IAppCache<V, K>, IDisakCache<K, V> {
 
         if (c == null)
             return null;
-        
+
         //create cache dir on internal storage
         String path = c.getCacheDir().getPath();
 
