@@ -3,6 +3,7 @@ package com.example.hsx.data.cache;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 
 import com.han.utils.HanLog;
 
@@ -80,7 +81,12 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
 
         //create cache dir on internal storage
         String path = c.getCacheDir().getPath();
+        File f = new File(path + "/thumbnails");
 
-        return new File(path + "/thumbnails");
+        String [] fStr = f.list();
+        for (String n : fStr)
+            HanLog.write("OWNCLOUD", " name:" + n);
+
+        return f;
     }
 }

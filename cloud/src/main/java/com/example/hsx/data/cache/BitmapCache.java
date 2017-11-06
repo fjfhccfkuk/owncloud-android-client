@@ -3,6 +3,8 @@ package com.example.hsx.data.cache;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import com.han.utils.HanLog;
+
 /**
  * Created by hz on 17-11-6.
  */
@@ -28,6 +30,9 @@ public class BitmapCache {
             ret = diskCache.getData(k);
             if (ret != null) {
                 memCache.setData(k, ret);
+                HanLog.write("OWNCLOUD", " Get disk data k:" + k + " v: bitmap is true.");
+            } else {
+                HanLog.write("OWNCLOUD", " Get disk data k:" + k + " v: bitmap is false.");
             }
 
             break;
@@ -37,7 +42,9 @@ public class BitmapCache {
     };
 
     public void set(String s, Bitmap b) {
+
         memCache.setData(s, b);
         diskCache.setData(s, b);
+        HanLog.write("OWNCLOUD", " Set disk data k:" + s);
     }
 }
