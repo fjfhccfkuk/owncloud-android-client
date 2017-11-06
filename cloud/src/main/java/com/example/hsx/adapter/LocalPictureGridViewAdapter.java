@@ -84,7 +84,7 @@ public class LocalPictureGridViewAdapter extends BaseAdapter {
             if (bmp != null)
                 ((ImageView)v).setImageBitmap(bmp.getBmp());
 
-            HanLog.write("OWNCLOUD", " CellSize:" + maxCellSize + " pos:" + position + " w:" + v.getWidth() + " h:" + v.getHeight() + " cV:" + ((convertView == null)?" is null":"not null"));
+//            HanLog.write("OWNCLOUD", " CellSize:" + maxCellSize + " pos:" + position + " w:" + v.getWidth() + " h:" + v.getHeight() + " cV:" + ((convertView == null)?" is null":"not null"));
         }
 
 //        HanLog.write("OWNCLOUD", "adapter, postion:" + position + " maxCellsize:" + maxCellSize);

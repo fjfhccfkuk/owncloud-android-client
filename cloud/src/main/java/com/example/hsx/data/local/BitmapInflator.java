@@ -31,7 +31,7 @@ import java.util.TreeMap;
  */
 
 public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>, DataInflator.LocalPicLoader{
-    private static BitmapInflator mInflator = new BitmapInflator();
+    private static BitmapInflator mInflator = null;//
     private List<PrivImages> mSrcList = null;
     private Map<Integer, ImageView> mViewMap = null;
     private Thread mTask = null;
@@ -41,7 +41,8 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
     private BitmapCache bmpMemcache = null;
     private static Context mCtx = null;
 
-    private BitmapInflator(){
+    private BitmapInflator(Context c){
+        mCtx = c;
         mViewMap = new TreeMap<Integer, ImageView>();
         mSrcList  = new ArrayList<>();
         mThumbnail = new HashMap<>();
@@ -52,8 +53,7 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
     }
 
     public static BitmapInflator getInstance(Context c) {
-        mCtx = c;
-        return mInflator;
+        return new BitmapInflator(c);
     }
 
     @Override
@@ -201,7 +201,7 @@ public class BitmapInflator implements DataInflator.LocalPicInflactor<ImageView>
                     while(ite.hasNext()) {
 
                         synchronized (mTask) {
-                            HanLog.write("OWNCLOUD", " counter:" + counter + " max_size:" + max_size);
+//                            HanLog.write("OWNCLOUD", " counter:" + counter + " max_size:" + max_size);
                             if (counter++ > max_size) {
                                 break;
                             }

@@ -1,8 +1,7 @@
 package com.example.hsx.data.cache;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import com.example.hsx.data.models.BitmapInfo;
+
 import com.han.utils.HanLog;
 
 import java.io.File;
@@ -17,6 +16,7 @@ public class DiskCache<K, V> implements IAppCache<V, K>, IDisakCache<K, V> {
 
     public DiskCache(Context c) {
         cacheDir = getCacheDir(c);
+        HanLog.write("OWNCLOUD", " Cache dir:" + cacheDir.getPath());
 
         try {
             diskCache = DiskLruCache.open(cacheDir, 1299, 1024, 1024 * 1024 * 10);
@@ -32,12 +32,10 @@ public class DiskCache<K, V> implements IAppCache<V, K>, IDisakCache<K, V> {
 
     @Override
     public void setData(K k, V v) {
-
+//        diskCache.get(k);
     }
 
     private File getCacheDir(Context c) {
-        File f = null;
-
         if (c == null)
             return null;
 
