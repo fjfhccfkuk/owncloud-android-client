@@ -9,12 +9,12 @@ import android.graphics.Bitmap;
 
 public class BitmapCache {
     private MemCache<String, Bitmap> memCache = null;
-    private DiskCache<String, Bitmap> diskCache = null;
+    private DiskCache diskCache = null;
     private Context mCtx = null;
 
     public BitmapCache (Context c) {
         memCache = new MemCache<String, Bitmap>();
-        diskCache = new DiskCache<String, Bitmap>(c);
+        diskCache = new DiskCache(c);
     }
 
     public Bitmap get(String k) {
@@ -29,6 +29,7 @@ public class BitmapCache {
             if (ret != null) {
                 memCache.setData(k, ret);
             }
+
             break;
         } while(false);
 
@@ -37,5 +38,6 @@ public class BitmapCache {
 
     public void set(String s, Bitmap b) {
         memCache.setData(s, b);
+        diskCache.setData(s, b);
     }
 }
