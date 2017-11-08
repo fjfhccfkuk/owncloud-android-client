@@ -87,12 +87,14 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
             HanLog.write("OWNCLOUD", " setData excp:" + e.toString());
         } finally {
             try {
-              if (diskCache != null) {
-                  diskCache.flush();
+
+              if (etor != null) {
+                  etor.commit();
               }
 
-              if (etor != null)
-                etor.commit();
+              if (diskCache != null) {
+                    diskCache.flush();
+              }
 
             }catch (Exception e){
                 HanLog.write("OWNCLOUD", " setData close excp:" + e.toString());
