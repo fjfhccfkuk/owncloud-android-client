@@ -48,7 +48,6 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
         Bitmap bmp = null;
         BufferedInputStream bis = null;
 
-//        bmp = diskCachea.getBitmap(p1);
         try {
             sn = diskCache.get(p1);
             if (sn == null)
@@ -60,10 +59,6 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
         } catch (Exception e){}
         finally {
             try {
-                if (bis != null)
-                    bis.close();
-                if (ios != null)
-                    ios.close();
                 if (sn != null)
                     sn.close();
             } catch(Exception e){}
@@ -74,7 +69,6 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
 
     @Override
     public void setData(String k, Bitmap v) {
-        DiskLruCache.Snapshot sn = null;
         DiskLruCache.Editor etor = null;
         OutputStream ots = null;
 
@@ -93,12 +87,10 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
             HanLog.write("OWNCLOUD", " setData excp:" + e.toString());
         } finally {
             try {
-              /*  if (ots != null)
-                    ots.close();*/
-
               if (diskCache != null) {
                   diskCache.flush();
               }
+
               if (etor != null)
                 etor.commit();
 
@@ -109,21 +101,24 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
     }
 
     private File getCacheDir(Context c) {
-        /*if (c == null)
+        if (c == null)
             return null;
 
         //create cache dir on internal storage
         String path = c.getCacheDir().getPath();
+        HanLog.write("OWNCLOUD", " cache dir:" + path);
         File f = new File(path + "/thumbnails");
 
-        if ()
-        String [] fStr = f.list();
-        for (String n : fStr)
-            HanLog.write("OWNCLOUD", " name:" + n);
+        if (f==null || f.list() == null || f.list().length <= 0);
+        else {
+            String[] fStr = f.list();
+            for (String n : fStr)
+                HanLog.write("OWNCLOUD", " name:" + n);
+        }
 
-        return f;*/
+        return f;
 
-        return getExternalCacheDir(c);
+//        return getExternalCacheDir(c);
     }
 
     public static File getExternalCacheDir(Context context) {
