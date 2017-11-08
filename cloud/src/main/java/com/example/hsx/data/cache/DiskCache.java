@@ -12,6 +12,7 @@ import com.han.utils.HanLog;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -110,12 +111,18 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
         String path = c.getCacheDir().getPath();
         HanLog.write("OWNCLOUD", " cache dir:" + path);
         File f = new File(path + "/thumbnails");
-
+        InputStream is = null;
         if (f==null || f.list() == null || f.list().length <= 0);
         else {
-            String[] fStr = f.list();
-            for (String n : fStr)
-                HanLog.write("OWNCLOUD", " name:" + n);
+            File [] fStr = f.listFiles();
+            for (File n : fStr) {
+                try {
+//                    is = new FileInputStream(n.getAbsolutePath());
+                    HanLog.write("OWNCLOUD", " name:" + n.getName() + " size:" + n.length()/**is.available()*/ + " B");
+//                    is.close();
+                } catch (Exception e){
+                }
+            }
         }
 
         return f;
