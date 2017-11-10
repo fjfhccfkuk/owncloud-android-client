@@ -51,6 +51,7 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
 
         try {
             sn = diskCache.get(p1);
+
             if (sn == null)
                 return null;
 
@@ -81,9 +82,12 @@ public class DiskCache implements IAppCache<Bitmap, String>, IDisakCache<String,
                 return;
             }
 
+            etor.set(0, v.toString());
+/*
             ots = new BufferedOutputStream(etor.newOutputStream(0), 4096);
             v.compress(Bitmap.CompressFormat.JPEG, 70, ots);
             ots.flush();
+*/
         } catch (Exception e){
             HanLog.write("OWNCLOUD", " setData excp:" + e.toString());
         } finally {
