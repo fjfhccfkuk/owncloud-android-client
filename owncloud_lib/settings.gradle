@@ -1,3 +1,3 @@
-include ':'
+include ':owncloud_lib'
 include ':sample_client'
 include ':test_client'
